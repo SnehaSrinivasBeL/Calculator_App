@@ -45,16 +45,13 @@ export default class App extends Component {
 
   calculate = () => {
     var checkResult = "";
-    if (this.state.result.includes("--")) {
-      checkResult = this.state.result.replace("--", "+");
-    } else {
+    if (this.state.result) {
       checkResult = this.state.result;
     }
-    debugger;
     try {
       this.setState({
         // eslint-disable-next-line
-        result: (eval(checkResult) || "") + "",
+        result: eval(checkResult),
       });
     } catch (e) {
       this.setState({
@@ -65,7 +62,6 @@ export default class App extends Component {
 
   trigonometric = (value) => {
     let exp = eval(`Math.${value}(this.state.result)`);
-    debugger;
     this.setState({
       result: exp,
     });
@@ -78,7 +74,6 @@ export default class App extends Component {
   };
 
   onClick(e) {
-    debugger;
     let btn_value = e.target.name;
     if (btn_value === "copy") {
       navigator.clipboard.writeText(this.state.result);
